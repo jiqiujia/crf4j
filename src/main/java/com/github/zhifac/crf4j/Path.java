@@ -21,6 +21,7 @@ public class Path {
         cost = 0.0;
     }
 
+    // 边对应的转移特征函数关于条件分布P(Y|X)的数学期望
     public void calcExpectation(double[] expected, double Z, int size) {
         double c = Math.exp(lnode.alpha + cost + rnode.beta - Z);
         for (int i = 0; fvector.get(i) != -1; i++) {

@@ -6,6 +6,7 @@ import java.util.concurrent.Callable;
 
 /**
  * Created by zhifac on 2017/3/25.
+ * 创建多个CRFEncoderThread，平均地将句子分给每个线程。每个线程的工作其实只是计算梯度：
  */
 public class CRFEncoderThread implements Callable<Integer> {
     public List<TaggerImpl> x;

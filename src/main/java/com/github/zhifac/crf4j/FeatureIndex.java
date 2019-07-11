@@ -41,6 +41,15 @@ public abstract class FeatureIndex {
 
     protected abstract int getID(String s);
 
+    /*
+     * 计算每个节点和每条边的代价（也就是特征函数乘以相应的权值，简称代价）
+     * 其中fvector是当前命中特征函数的起始id集合，对于每个起始id，都有连续标签个数种y值；
+     * n->y是当前时刻的标签，由于每个特征函数都必须同时接受x和y才能决定输出1或0，所以要把两者加起来才能确定最终特征函数的id。
+     * 用此id就能在alpha向量中取到最终的权值，将权值累加起来，乘以一个倍率（也就是所谓的代价参数cost_factor），得到最终的代价cost。
+     *
+     * 对于边来说，也是类似的，只不过对每个起始id，都有连续标签个数平方种y值组合。
+    */
+    // 计算状态特征函数的代价
     public void calcCost(Node node) {
         node.cost = 0.0;
         if (alphaFloat_ != null) {
@@ -58,6 +67,7 @@ public abstract class FeatureIndex {
         }
     }
 
+    // 计算转移特征函数的代价
     public void calcCost(Path path) {
         path.cost = 0.0;
         if (alphaFloat_ != null) {

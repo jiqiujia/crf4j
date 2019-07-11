@@ -57,6 +57,7 @@ public class Node {
         beta += cost;
     }
 
+    // 节点对应的状态特征函数关于条件分布P(Y|X)的数学期望
     public void calcExpectation(double[] expected, double Z, int size) {
         double c = Math.exp(alpha + beta - cost - Z);
         for (int i = 0; fVector.get(i) != -1; i++) {

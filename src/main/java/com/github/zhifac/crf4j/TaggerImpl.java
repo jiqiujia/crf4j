@@ -141,6 +141,7 @@ public class TaggerImpl extends Tagger {
         cost_ = -node_.get(x_.size() - 1).get(result_.get(x_.size() - 1)).bestCost;
     }
 
+    // 调用rebuildFeatures对每个时刻的每个状态分别构造边和顶点：
     public void buildLattice() {
         if (!x_.isEmpty()) {
             feature_index_.rebuildFeatures(this);
@@ -208,10 +209,13 @@ public class TaggerImpl extends Tagger {
         if (x_.isEmpty()) {
             return 0.0;
         }
+        // 先构建网格
         buildLattice();
+        // 构建完就可以跑前向后向算法
         forwardbackward();
         double s = 0.0;
 
+        // 计算节点期望值
         for (int i = 0; i < x_.size(); i++) {
             for (int j = 0; j < ysize_; j++) {
                 node_.get(i).get(j).calcExpectation(expected, Z_, ysize_);
