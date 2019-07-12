@@ -12,7 +12,7 @@ public abstract class FeatureIndex {
     public static String[] EOS = {"_B+1", "_B+2", "_B+3", "_B+4", "_B+5", "_B+6", "_B+7", "_B+8"};
     protected int maxid_;
     protected double[] alpha_;  // 特征函数的权重
-    protected float[] alphaFloat_;
+    protected float[] alphaFloat_;  // 这个跟alphaFloat_的功能是一样的？
     protected double costFactor_;
     protected int xsize_;   // 列数
     protected boolean checkMaxXsize_;

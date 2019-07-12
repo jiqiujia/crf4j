@@ -67,7 +67,7 @@ public class Encoder {
                         System.err.println("fail to build feature index ");
                         return false;
                     }
-                    tagger.setThread_id_(lineNo % threadNum);
+                    tagger.setThread_id_(lineNo % threadNum);   // 每个句子分配到不同的线程
                     x.add(tagger);
                 } else if (status == TaggerImpl.ReadStatus.EOF) {
                     break;

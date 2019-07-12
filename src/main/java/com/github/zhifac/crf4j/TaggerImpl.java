@@ -27,23 +27,23 @@ public class TaggerImpl extends Tagger {
 
     public enum ReadStatus {SUCCESS, EOF, ERROR}
 
-    Mode mode_ = Mode.TEST;
-    int vlevel_ = 0;
-    int nbest_ = 0;
-    int ysize_;
-    double cost_;
-    double Z_;
-    int feature_id_;
-    int thread_id_;
-    FeatureIndex feature_index_;
-    List<List<String>> x_;  //代表一个句子，每行的多列
-    List<List<Node>> node_; // node_[i][j]表示一个节点，即：第i个词是第j个label的点。如：“我”这个词是“代词”
-    List<Integer> answer_;  // 每个词对应的label, groundtruth
-    List<Integer> result_;  // 预测结果
-    String lastError;
-    PriorityQueue<QueueElement> agenda_;
-    List<List<Double>> penalty_;
-    List<List<Integer>> featureCache_;
+    private Mode mode_ = Mode.TEST;
+    private int vlevel_ = 0;
+    private int nbest_ = 0;
+    private int ysize_;
+    private double cost_;
+    private double Z_;
+    private int feature_id_;
+    private int thread_id_;
+    private FeatureIndex feature_index_;
+    private List<List<String>> x_;  //代表一个句子，每行的多列
+    private List<List<Node>> node_; // node_[i][j]表示一个节点，即：第i个词是第j个label的点。如：“我”这个词是“代词”
+    private List<Integer> answer_;  // 每个词对应的label, groundtruth
+    private List<Integer> result_;  // 预测结果
+    private String lastError;
+    private PriorityQueue<QueueElement> agenda_;
+    private List<List<Double>> penalty_;
+    private List<List<Integer>> featureCache_;
 
     public TaggerImpl(Mode mode) {
         mode_ = mode;
