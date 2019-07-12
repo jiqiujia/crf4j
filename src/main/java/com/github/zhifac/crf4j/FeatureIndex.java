@@ -11,17 +11,17 @@ public abstract class FeatureIndex {
     public static String[] BOS = {"_B-1", "_B-2", "_B-3", "_B-4", "_B-5", "_B-6", "_B-7", "_B-8"};
     public static String[] EOS = {"_B+1", "_B+2", "_B+3", "_B+4", "_B+5", "_B+6", "_B+7", "_B+8"};
     protected int maxid_;
-    protected double[] alpha_;
+    protected double[] alpha_;  // 特征函数的权重
     protected float[] alphaFloat_;
     protected double costFactor_;
-    protected int xsize_;
+    protected int xsize_;   // 列数
     protected boolean checkMaxXsize_;
     protected int max_xsize_;
     protected int threadNum_;
     protected List<String> unigramTempls_;
     protected List<String> bigramTempls_;
     protected String templs_;
-    protected List<String> y_;
+    protected List<String> y_;  // target label集合
     protected List<List<Path>> pathList_;
     protected List<List<Node>> nodeList_;
 
@@ -121,6 +121,7 @@ public abstract class FeatureIndex {
         }
     }
 
+    // 模板具象化，比如 U140:场/面/的
     public String applyRule(String str, int cur, TaggerImpl tagger) {
         StringBuilder sb = new StringBuilder();
         for (String tmp : str.split("%x", -1)) {
@@ -162,7 +163,7 @@ public abstract class FeatureIndex {
         List<List<Integer>> featureCache = tagger.getFeatureCache_();
         tagger.setFeature_id_(featureCache.size());
 
-        for (int cur = 0; cur < tagger.size(); cur++) {
+        for (int cur = 0; cur < tagger.size(); cur++) { //遍历每个词，计算每个词的unigram特征
             if (!buildFeatureFromTempl(feature, unigramTempls_, cur, tagger)) {
                 return false;
             }
@@ -170,7 +171,7 @@ public abstract class FeatureIndex {
             featureCache.add(feature);
             feature = new ArrayList<Integer>();
         }
-        for (int cur = 1; cur < tagger.size(); cur++) {
+        for (int cur = 1; cur < tagger.size(); cur++) { //遍历每个词，计算每个词的bigram特征
             if (!buildFeatureFromTempl(feature, bigramTempls_, cur, tagger)) {
                 return false;
             }

@@ -24,6 +24,7 @@ public class EncoderFeatureIndex extends FeatureIndex {
         dic_ = new HashMap<String, Pair<Integer, Integer>>();
     }
 
+    // 获取特征ID
     public int getID(String key) {
         if (!dic_.containsKey(key)) {
             dic_.put(key, new Pair<Integer, Integer>(maxid_, 1));
@@ -63,6 +64,7 @@ public class EncoderFeatureIndex extends FeatureIndex {
                 try {
                     isr.close();
                 } catch(Exception e2) {
+                    e2.printStackTrace();
                 }
             }
             e.printStackTrace();
@@ -109,6 +111,7 @@ public class EncoderFeatureIndex extends FeatureIndex {
                 try {
                     isr.close();
                 } catch(Exception e2) {
+                    e2.printStackTrace();
                 }
             }
             e.printStackTrace();

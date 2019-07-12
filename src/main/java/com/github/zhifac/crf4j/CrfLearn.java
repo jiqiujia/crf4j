@@ -26,7 +26,7 @@ public class CrfLearn {
         options.addOption("H", "shrinking-size", true, "set INT for number of iterations variable needs to be optimal before considered for shrinking. (default 20)");
         options.addOption("h", "help", false, "show this help and exit");
 
-        CommandLine cmd = null;
+        CommandLine cmd;
         try {
             cmd = parser.parse(options, args);
         } catch(ParseException e) {
@@ -55,7 +55,7 @@ public class CrfLearn {
 
         String algorithm = cmd.getOptionValue("a", "CRF-L2");
         algorithm = algorithm.toLowerCase();
-        Encoder.Algorithm algo = Encoder.Algorithm.CRF_L2;
+        Encoder.Algorithm algo;
         if (algorithm.equals("crf") || algorithm.equals("crf-l2")) {
             algo = Encoder.Algorithm.CRF_L2;
         } else if (algorithm.equals("crf-l1")) {

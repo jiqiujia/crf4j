@@ -14,6 +14,7 @@ import java.util.PriorityQueue;
 /**
  * Created by zhifac on 2017/3/19.
  */
+// 一个TaggerIml是一个句子
 public class TaggerImpl extends Tagger {
     class QueueElement {
         Node node;
@@ -35,10 +36,10 @@ public class TaggerImpl extends Tagger {
     int feature_id_;
     int thread_id_;
     FeatureIndex feature_index_;
-    List<List<String>> x_;
-    List<List<Node>> node_;
-    List<Integer> answer_;
-    List<Integer> result_;
+    List<List<String>> x_;  //代表一个句子，每行的多列
+    List<List<Node>> node_; // node_[i][j]表示一个节点，即：第i个词是第j个label的点。如：“我”这个词是“代词”
+    List<Integer> answer_;  // 每个词对应的label, groundtruth
+    List<Integer> result_;  // 预测结果
     String lastError;
     PriorityQueue<QueueElement> agenda_;
     List<List<Double>> penalty_;

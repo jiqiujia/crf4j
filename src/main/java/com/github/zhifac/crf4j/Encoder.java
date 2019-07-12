@@ -41,7 +41,6 @@ public class Encoder {
             return false;
         }
         EncoderFeatureIndex featureIndex = new EncoderFeatureIndex(threadNum);
-        List<TaggerImpl> x = new ArrayList<TaggerImpl>();
         if (!featureIndex.open(templFile, trainFile)) {
             System.err.println("Fail to open " + templFile + " " + trainFile);
         }
@@ -50,10 +49,10 @@ public class Encoder {
             System.err.println("train file " + trainFile + " does not exist.");
             return false;
         }
-        BufferedReader br = null;
+        List<TaggerImpl> x = new ArrayList<>();
+        BufferedReader br;
         try {
-            InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "UTF-8");
-            br = new BufferedReader(isr);
+            br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
             int lineNo = 0;
             while (true) {
                 TaggerImpl tagger = new TaggerImpl(TaggerImpl.Mode.LEARN);
