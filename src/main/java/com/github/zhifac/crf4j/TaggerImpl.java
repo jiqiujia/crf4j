@@ -216,12 +216,13 @@ public class TaggerImpl extends Tagger {
         forwardbackward();
         double s = 0.0;
 
-        // 计算节点期望值
+        // 计算节点期望值，计算特征函数的期望是因为后续计算梯度的时候会用到
         for (int i = 0; i < x_.size(); i++) {
             for (int j = 0; j < ysize_; j++) {
                 node_.get(i).get(j).calcExpectation(expected, Z_, ysize_);
             }
         }
+        // 对于一个句子来说，特征函数的期望减去特征函数真实值就是我们要计算的梯度（跟lr很像）
         for (int i = 0; i < x_.size(); i++) {
             List<Integer> fvector = node_.get(i).get(answer_.get(i)).fVector;
             for (int j = 0; fvector.get(j) != -1; j++) {
